@@ -3,24 +3,27 @@ node {
         echo 'Starting the pipeline...'
     }
 
-    stage('Build') {
+   stage('Try-catch'){
         try {
-            echo 'Starting the build process...'
-           
-            sh 'exit 1'  // This simulates an error
-            echo 'Build completed successfully!'
+           //block
+           echo 'Starting the test'
+           sh 'exit 1'
+           echo 'Test succesful'
         } catch (Exception e) {
-            echo "Build failed: ${e.getMessage()}"
-            // Here you can take actions in case of failure, such as notifying a team or cleaning up resources.
-            currentBuild.result = 'FAILURE'
+            //commands
+            echo "Test failed ${e.getMessage()}"
+            currentBuild.result ='FAILURE'
         }
     }
-  
-    stage('End') {
-        if (currentBuild.result == 'FAILURE') {
-            echo 'Pipeline finished with errors.'
-        } else {
-            echo 'Pipeline completed successfully!'
+
+    stage('End'){
+        if (currentBuild=='FAILURE'){
+            echo 'Pipeline finished with errors'
+        }
+        else {
+            echo 'Pipeline finished successfully'
         }
     }
 }
+  
+    
