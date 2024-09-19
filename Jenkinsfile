@@ -17,7 +17,7 @@ node {
     }
 
     stage('End'){
-        if (currentBuild=='FAILURE'){
+        if (currentBuild.result=='FAILURE'){
             echo 'Pipeline finished with errors'
         }
         else {
